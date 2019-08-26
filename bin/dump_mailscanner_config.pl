@@ -53,8 +53,7 @@ dump_prefilter_files() or fatal_error("CANNOTDUMPPREFILTERS", $lasterror);
 dump_virus_file() or fatal_error("CANNOTDUMPVIRUSFILE", $lasterror);
 dump_filename_config() or fatal_error("NOFILENAMECONFIGURATIONFOUND", "no record found for filenames");
 dump_filetype_config() or fatal_error("NOFILETYPECONFIGURATIONFOUND", "no record found for filetypes");
-dump_Oscar_config();
-dump_FuzzyOcr_config();
+dump_TesseractOcr_config();
 dump_saplugins_conf();
 dump_dnsblacklists_conf();
 
@@ -216,7 +215,7 @@ sub get_sa_config
   my %row = $db->getHashRow("SELECT use_bayes, bayes_autolearn, ok_languages, ok_locales, use_rbls, rbls_timeout, use_dcc, 
 				dcc_timeout, use_razor, razor_timeout, use_pyzor, pyzor_timeout, trusted_ips, sa_rbls,
 				spf_timeout, use_spf, dkim_timeout, use_dkim, dmarc_follow_quarantine_policy, 
-				use_fuzzyocr, use_imageinfo, use_pdfinfo, use_botnet FROM antispam WHERE set_id=1");
+				use_ocr, use_imageinfo, use_pdfinfo, use_botnet FROM antispam WHERE set_id=1");
   return unless %row;
   
   $config{'__USE_BAYES__'} = $row{'use_bayes'};
@@ -246,7 +245,7 @@ sub get_sa_config
   $config{'__SPF_TIMEOUT__'} = $row{'spf_timeout'};
   $config{'__USE_DKIM__'} = $row{'use_dkim'};
   $config{'__DKIM_TIMEOUT__'} = $row{'dkim_timeout'};
-  $config{'__USE_FUZZYOCR__'} = $row{'use_fuzzyocr'};
+  $config{'__USE_OCR__'} = $row{'use_ocr'};
   $config{'__USE_IMAGEINFO__'} = $row{'use_imageinfo'};
   $config{'__USE_PDFINFO__'} = $row{'use_pdfinfo'};
   $config{'__USE_BOTNET__'} = $row{'use_botnet'};
@@ -428,20 +427,11 @@ sub dump_virus_file
 }
 
 #############################
-sub dump_Oscar_config
+sub dump_TesseractOcr_config
 {
   my $template = ConfigTemplate::create(
-                          'etc/mailscanner/OscarOcr.cf_template', 
-                          'share/spamassassin/OscarOcr.cf');  
-  return $template->dump();
-}
-
-#############################
-sub dump_FuzzyOcr_config
-{
-  my $template = ConfigTemplate::create(
-                          'etc/mailscanner/FuzzyOcr.cf_template', 
-                          'share/spamassassin/FuzzyOcr.cf');  
+                          'etc/mailscanner/TesseractOcr.cf_template', 
+                          'share/spamassassin/TesseractOcr.cf');  
   return $template->dump();
 }
 
@@ -460,8 +450,7 @@ sub dump_saplugins_conf
           '__IF_DKIM__' => getModuleStatus('__USE_DKIM__'),
           '__IF_URIDNSBL__' => getModuleStatus('__USE_RBLS__'),
           '__IF_SPF__' => getModuleStatus('__USE_SPF__'),
-          '__IF_FUZZYOCR__' => getModuleStatus('__USE_FUZZYOCR__'),
-          '__IF_OSCAR__' => getModuleStatus('__USE_FUZZYOCR__'),
+          '__IF_OCR__' => getModuleStatus('__USE_OCR__'),
           '__IF_PDFINFO__' => getModuleStatus('__USE_PDFINFO__'),
           '__IF_BOTNET__' => getModuleStatus('__USE_BOTNET__'),
         );

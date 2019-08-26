@@ -59,7 +59,7 @@ class Default_Form_AntiSpam_Spamc extends Default_Form_AntiSpam_Default
 		$localchecks = array(
 		  'use_bayes' => 'Use statistical filter',
 		  'bayes_autolearn' => 'enable auto learning',
-		  'use_fuzzyocr' => 'Enable text recognition in images',
+		  'use_ocr' => 'Enable text recognition in images',
 		  'use_imageinfo' => 'Enable image format/size detection',
 		  'use_pdfinfo' => 'Enable PDF format detection',
 		  'use_botnet' => 'Enable botnet detection',
@@ -151,7 +151,7 @@ class Default_Form_AntiSpam_Spamc extends Default_Form_AntiSpam_Default
            $as->setParam('sa_rbls', $rblstr);
 		}
 		
-		foreach (array('use_bayes', 'bayes_autolearn', 'use_fuzzyocr', 'use_imageinfo', 'use_pdfinfo', 'use_botnet', 'dmarc_follow_quarantine_policy') as $p) {
+		foreach (array('use_bayes', 'bayes_autolearn', 'use_ocr', 'use_imageinfo', 'use_pdfinfo', 'use_botnet', 'dmarc_follow_quarantine_policy') as $p) {
 			$as->setParam($p, $request->getParam($p));
 		}
 		

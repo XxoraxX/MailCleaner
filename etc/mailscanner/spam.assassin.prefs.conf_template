@@ -90,7 +90,3 @@ score    MC_DMARC_QUARANTINE   50.0
 __FI__
 
 envelope_sender_header X-MailCleaner-From
-
-ifplugin FuzzyOcr
-focr_global_wordlist __SRCDIR__/share/spamassassin/FuzzyOcr.words
-endif

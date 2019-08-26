@@ -32,7 +32,7 @@ class Spamc extends PreFilter {
                         'use_pyzor' => 1,
                         'pyzor_timeout' => 20,
                         'sa_rbls' => '',
-                        'use_fuzzyocr' => 1,
+                        'use_ocr' => 1,
                         'use_pdfinfo' => 1,
                         'use_imageinfo' => 1,
                         'use_botnet' => 1,
@@ -58,7 +58,7 @@ public function getSpeciticReplace($template, $form) {
   $ret = array(
          "__FORM_INPUTUSEBAYES__" => $form->checkbox('use_bayes', 1, $this->getPref('use_bayes'), '', 1),
          "__FORM_INPUTUSEAUTOLEARN__" => $form->checkbox('bayes_autolearn', 1, $this->getPref('bayes_autolearn'), '', 1),
-         "__FORM_INPUTUSEFUZZYOCR__" => $form->checkbox('use_fuzzyocr', 1, $this->getPref('use_fuzzyocr'), '', 1),
+         "__FORM_INPUTUSEOCR__" => $form->checkbox('use_ocr', 1, $this->getPref('use_ocr'), '', 1),
          "__FORM_INPUTUSEIMAGEINFO__" => $form->checkbox('use_imageinfo', 1, $this->getPref('use_imageinfo'), '', 1),
          "__FORM_INPUTUSEPDFINFO__" => $form->checkbox('use_pdfinfo', 1, $this->getPref('use_pdfinfo'), '', 1),
          "__FORM_INPUTUSERBLS__" => $form->checkbox('use_rbls', 1, $this->getPref('use_rbls'), '', 1),

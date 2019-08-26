@@ -28,7 +28,7 @@ class Default_Model_AntispamConfig
        'razor_timeout' => 10,
        'use_pyzor' => 1,
        'pyzor_timeout' => 10,
-       'use_fuzzyocr' => 1,
+       'use_ocr' => 1,
        'use_pdfinfo' => 1,
        'use_imageinfo' => 1,
        'use_botnet' => 1,
